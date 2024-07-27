@@ -1,6 +1,7 @@
 import express, { json } from "express"
 import cors from "cors"
 import mysql from "mysql2/promise"
+import 'dotenv/config'
 
 const app = express()
 
@@ -8,11 +9,11 @@ app.use(express.json())
 app.use(cors())
 
 const db = await mysql.createConnection({
-    host:"localhost",
-    port:"3306",
-    user:"root",
-    password:"9370",
-    database:"fg_component_data"
+    host:process.env.DB_HOST,
+    port:process.env.DB_PORT,
+    user:process.env.DB_USER,
+    password:process.env.DB_PASS,
+    database:process.env.DB_DATABASE
 })
 
 app.get("/", (req,res)=>{
