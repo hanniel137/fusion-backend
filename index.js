@@ -361,6 +361,6 @@ app.get("/price", async (req,res)=>{
         }
 })
 
-app.listen(8800, ()=>{
+app.listen( ()=>{
     console.log("Connected to backend!!")
 })
