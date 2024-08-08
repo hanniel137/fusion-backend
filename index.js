@@ -10,7 +10,7 @@ const app = express()
 
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors({credentials: true, origin: 'https://fusion-client.vercel.app/'}))
+app.use(cors({credentials: true, origin: 'https://fusion-client.vercel.app'}))
 
 const db = await mysql.createConnection({
     host:process.env.DB_HOST,
