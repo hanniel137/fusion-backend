@@ -10,7 +10,7 @@ const app = express()
 
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors({credentials: true, origin: 'https://fusion-client.vercel.app'}))
+app.use(cors({credentials: true}))
 
 const db = await mysql.createConnection({
     host:process.env.DB_HOST,
@@ -101,14 +101,14 @@ app.post("/login", async(req,res)=>{
             return;
         }
         const [count, fields1] = await user.query(
-            "SELECT COUNT(*) AS CNT FROM fg_user_data.user where number='"+number+"'"
+            "SELECT COUNT(*) AS CNT FROM fg_user_data.user where number='"+number+"' or email='"+number+"'"
         )
         if(!(count[0].CNT)){
             res.status(402).send('User does not exist!');
             return;
         } else {
             const [userChk, fields2] = await user.query(
-                "SELECT password, firstname, number, email FROM fg_user_data.user where number='"+number+"'"
+                "SELECT password, firstname, number, email FROM fg_user_data.user where number='"+number+"'or email='"+number+"'"
             )
             const passCheck = await bcrypt.compare(password, userChk[0].password);
             if(passCheck){
