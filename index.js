@@ -17,7 +17,7 @@ const db = await mysql.createConnection({
 })
 
 app.get("/", (req,res)=>{
-    res.json("Hello!")
+    res.json("Hello!", process.env.DB_HOST)
 })
 
 
